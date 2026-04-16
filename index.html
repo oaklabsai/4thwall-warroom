@@ -5,6 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>4THWALL · WAR ROOM</title>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+// Password gate
+(function(){
+  var unlocked = sessionStorage.getItem('4tw_warroom');
+  if(unlocked !== '1'){
+    document.addEventListener('DOMContentLoaded', function(){
+      document.body.style.display='none';
+      var overlay=document.createElement('div');
+      overlay.id='pw-gate';
+      overlay.style.cssText='position:fixed;inset:0;z-index:9999;background:#111110;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;';
+      var logo=document.createElement('div');
+      logo.style.cssText='font-family:Geist Mono,monospace;font-size:13px;color:#c9a84c;letter-spacing:0.1em;margin-bottom:8px;';
+      logo.textContent='4THWALL · WAR ROOM';
+      var input=document.createElement('input');
+      input.type='password';
+      input.placeholder='Enter password';
+      input.style.cssText='background:#1a1a18;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:10px 16px;color:#f0ede8;font-family:Geist,sans-serif;font-size:14px;outline:none;width:220px;text-align:center;';
+      var msg=document.createElement('div');
+      msg.style.cssText='font-size:11px;color:#c94c4c;min-height:16px;';
+      input.addEventListener('keydown',function(e){
+        if(e.key==='Enter'){
+          if(input.value==='esqui'){sessionStorage.setItem('4tw_warroom','1');document.body.style.display='';overlay.remove();}
+          else{msg.textContent='Incorrect password';input.value='';input.focus();}
+        }
+      });
+      input.addEventListener('input',function(){msg.textContent='';});
+      overlay.appendChild(logo);
+      overlay.appendChild(input);
+      overlay.appendChild(msg);
+      document.documentElement.appendChild(overlay);
+      setTimeout(function(){input.focus();},100);
+    });
+  }
+})();
+</script>
 <style>
 :root {
   --bg: #111110;
