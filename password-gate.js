@@ -5,7 +5,7 @@
  */
 
 (function() {
-  const PASSWORD_HASH = 'be01497ab3ff09930187054421695cd19e63dbdb1fbf574a8bca07ae88a551f4'; // "greenwich"
+  const PASSWORD_HASH = 'be0c3beffdb5f9e3d6e452f82fc357d92f790d7d1d4839998eeb57c9ed925d64'; // "esqui"
   const STORAGE_KEY = 'warroom_auth';
   
   async function sha256(str) {
