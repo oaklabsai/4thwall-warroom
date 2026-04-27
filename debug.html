@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Debug openDrawer</title>
+</head>
+<body>
+<h1>Test openDrawer Function</h1>
+
+<div id="testResult">Loading...</div>
+
+<script>
+const BUSINESSES = [
+  {id:1, scan:1, name:"Test Business", city:"Test City", industry:"finance", size:"Small", phone:"555-1234", email:"test@test.com", website:"example.com", dm:"Test DM", presence:"Test presence", pitch:"Test pitch", dealSize:"$50K", closeSpeed:"1-2 weeks", hipaa:false, priority:null, tags:["finance"], services:[{rank:1, name:"Service 1", why:"Because"}], reasoning:["Reason 1"], pain:"Test pain", openingLine:"Hello", ask:"Please buy", context:"Test context"}
+];
+
+const IND_LABELS = {finance: "Finance"};
+
+let activeDtab = 'overview';
+
+function openDrawer(id) {
+  console.log("openDrawer called with id:", id);
+  const b = BUSINESSES.find(x => x.id === id);
+  console.log("Found business:", b);
+  
+  if (!b) {
+    document.getElementById('testResult').innerHTML = "ERROR: Business not found for id " + id;
+    return;
+  }
+  
+  document.getElementById('testResult').innerHTML = "SUCCESS: " + JSON.stringify(b, null, 2);
+}
+
+function switchDTab(tab, el) {
+  activeDtab = tab;
+}
+
+function closeDrawer(e) {
+  document.getElementById('testResult').innerHTML = "Drawer closed";
+}
+
+// Test directly
+openDrawer(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4THWALL · WAR ROOM - Drawer Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #111110; --surface: #1a1a18; --border: rgba(255,255,255,0.07); --text: #f0ede8; --muted: #6b6b68; --gold: #c9a84c; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { background: var(--bg); color: var(--text); font-family: 'Geist', system-ui, sans-serif; padding: 20px; }
+.biz-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; cursor: pointer; max-width: 400px; margin-bottom: 20px; }
+.biz-card:hover { border-color: rgba(255,255,255,0.14); }
+.card-name { font-weight: 600; margin-bottom: 8px; }
+.card-pitch { color: var(--muted); font-size: 13px; }
+.drawer-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.7); display: none; align-items: flex-start; justify-content: flex-end; }
+.drawer-overlay.open { display: flex; }
+.drawer { background: var(--surface); border-left: 1px solid var(--border); width: min(560px, 100vw); height: 100vh; padding: 20px; overflow-y: auto; }
+.dtab-content { display: none; }
+.dtab-content.active { display: block; }
+.dtab { display: inline-block; padding: 8px 16px; margin-right: 8px; cursor: pointer; border-bottom: 2px solid transparent; }
+.dtab.active { border-bottom-color: var(--gold); }
+.drawer-name { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+.dmeta-pill { display: inline-block; background: rgba(255,255,255,0.05); padding: 4px 8px; border-radius: 4px; font-size: 12px; margin-right: 8px; }
+.d-section { margin: 16px 0; }
+.d-label { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Debug: Click the card below</h1>
+
+<div id="grid"></div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(event)">
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div class="drawer-name" id="dName"></div>
+    <button onclick="closeDrawer()">Close ✕</button>
+  </div>
+  <div class="drawer-tabs" id="dTabs">
+    <div class="dtab active" data-dtab="overview" onclick="switchDTab('overview',this)">Overview</div>
+    <div class="dtab" data-dtab="script" onclick="switchDTab('script',this)">Script</div>
+    <div class="dtab" data-dtab="contact" onclick="switchDTab('contact',this)">Contact</div>
+    <div class="dtab" data-dtab="objections" onclick="switchDTab('objections',this)">Objections</div>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <div class="dtab-content active" id="dtab-overview"></div>
+    <div class="dtab-content" id="dtab-script"></div>
+    <div class="dtab-content" id="dtab-contact"></div>
+    <div class="dtab-content" id="dtab-objections"></div>
+  </div>
+</div>
+</div>
+
+<script>
+const OBJECTIONS = [{q:"Test objection", a:"Test answer"}];
+const IND_LABELS = {finance: "Finance"};
+
+const BUSINESSES = [
+  {id:1, scan:1, name:"Test Business", city:"Test City", industry:"finance", size:"Small", phone:"555-1234", email:"test@test.com", website:"example.com", dm:"Test DM", presence:"Test presence", pitch:"Test pitch", dealSize:"$50K", closeSpeed:"1-2 weeks", hipaa:false, priority:1, tags:["finance"], services:[{rank:1, name:"Service 1", why:"Because"}], reasoning:["Reason 1"], pain:"Test pain", openingLine:"Hello", ask:"Please buy", context:"Test context"}
+];
+
+let activeDtab = 'overview';
+
+function render() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = BUSINESSES.map(b => `
+    <div class="biz-card" onclick="openDrawer(${b.id})">
+      <div class="card-name">${b.name}</div>
+      <div class="card-pitch">${b.pitch}</div>
+    </div>
+  `).join('');
+}
+
+function openDrawer(id) {
+  console.log("openDrawer called with id:", id);
+  const b = BUSINESSES.find(x => x.id === id);
+  if (!b) {
+    console.error("Business not found for id:", id);
+    return;
+  }
+  
+  document.getElementById('dName').textContent = b.name;
+  
+  const pills = [];
+  pills.push(`<span class="dmeta-pill">${IND_LABELS[b.industry]||b.industry} · S${b.scan}</span>`);
+  if (b.dealSize) pills.push(`<span class="dmeta-pill">${b.dealSize}</span>`);
+  document.getElementById('dMeta').innerHTML = pills.join('');
+  
+  document.getElementById('dtab-overview').innerHTML = `
+    <div class="d-section"><div class="d-label">Pitch</div>${b.pitch}</div>
+    <div class="d-section"><div class="d-label">Pain</div>${b.pain}</div>
+  `;
+  
+  document.getElementById('dtab-script').innerHTML = `
+    <div class="d-section"><div class="d-label">Opening Line</div>${b.openingLine}</div>
+    <div class="d-section"><div class="d-label">Ask</div>${b.ask}</div>
+    <div class="d-section"><div class="d-label">Context</div>${b.context}</div>
+  `;
+  
+  const actions = [];
+  if (b.phone) actions.push(`<div><strong>Phone:</strong> ${b.phone}</div>`);
+  if (b.email) actions.push(`<div><strong>Email:</strong> ${b.email}</div>`);
+  document.getElementById('dtab-contact').innerHTML = `
+    <div class="d-section"><div class="d-label">Contact Actions</div>${actions.join('')}</div>
+    <div class="d-section"><div class="d-label">Decision Maker</div>${b.dm}</div>
+  `;
+  
+  document.getElementById('dtab-objections').innerHTML = `
+    <div class="d-section"><div class="d-label">Objections</div>${OBJECTIONS.map(o => `<div><strong>${o.q}</strong><br>${o.a}</div>`).join('<br>')}</div>
+  `;
+  
+  switchDTab('overview', document.querySelector('[data-dtab="overview"]'));
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+
+function closeDrawer(e) {
+  if (e && e.target !== document.getElementById('drawerOverlay')) return;
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+
+function switchDTab(tab, el) {
+  activeDtab = tab;
+  document.querySelectorAll('.dtab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.dtab-content').forEach(c => c.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('dtab-'+tab).classList.add('active');
+}
+
+render();
+</script>
+</body>
+</html>

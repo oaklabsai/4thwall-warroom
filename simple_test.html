@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+:root { --bg: #111110; --surface: #1a1a18; --text: #f0ede8; }
+body { background: var(--bg); color: var(--text); font-family: sans-serif; }
+.drawer-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.7); display: none; align-items: flex-start; justify-content: flex-end; }
+.drawer-overlay.open { display: flex; }
+.drawer { background: var(--surface); width: min(560px, 100vw); height: 100vh; display: flex; flex-direction: column; animation: slideIn 0.2s ease; }
+@keyframes slideIn { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.biz-card { background: #222; padding: 20px; margin: 10px; border-radius: 8px; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1>Drawer Test</h1>
+<div id="cardContainer"></div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(event)">
+  <div class="drawer" id="drawer">
+    <div style="padding:20px;">
+      <h2 id="dName"></h2>
+      <div id="dMeta"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const BUSINESSES = [
+  {id:1, name:"Test Business 1", city:"Greenwich", industry:"finance", scan:1, dealSize:"$100K"},
+  {id:2, name:"Test Business 2", city:"Stamford", industry:"healthcare", scan:2, dealSize:"$50K"},
+];
+
+function render() {
+  const container = document.getElementById('cardContainer');
+  container.innerHTML = BUSINESSES.map(b => {
+    return `<div class="biz-card" onclick="openDrawer(${b.id})">
+      <h3>${b.name}</h3>
+      <p>${b.city}</p>
+    </div>`;
+  }).join('');
+}
+
+let activeDtab = 'overview';
+
+function openDrawer(id) {
+  console.log('openDrawer called with id:', id);
+  const b = BUSINESSES.find(x => x.id === id);
+  if (!b) {
+    console.error('Business not found:', id);
+    return;
+  }
+  console.log('Found business:', b.name);
+  document.getElementById('dName').textContent = b.name;
+  document.getElementById('dMeta').textContent = b.dealSize || '—';
+  document.getElementById('drawerOverlay').classList.add('open');
+}
+
+function closeDrawer(e) {
+  if (e && e.target !== document.getElementById('drawerOverlay')) return;
+  document.getElementById('drawerOverlay').classList.remove('open');
+}
+
+// Render cards on load
+render();
+console.log('Cards rendered, openDrawer is:', typeof openDrawer);
+</script>
+</body>
+</html>
