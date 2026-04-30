@@ -870,6 +870,130 @@ html, body {
   border: 1px solid rgba(76,143,201,0.2);
   font-size: 9px; padding: 1px 5px; border-radius: 3px; font-weight: 500;
 }
+
+/* ── DIAL BAR (caller dashboard) ── */
+.dial-bar {
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-height: 44px;
+}
+.dial-stat {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--muted);
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border); border-radius: 5px;
+  padding: 4px 10px; white-space: nowrap;
+}
+.dial-stat-num { font-family:'Geist Mono',monospace; font-size:13px; font-weight:700; color:var(--text); }
+.dial-stat-num.d-demos { color:#22c55e; }
+.dial-stat-num.d-dnc { color:#ef4444; }
+.dial-sep { width:1px; height:18px; background:var(--border); flex-shrink:0; }
+.dial-session { font-size:11px; color:var(--gold); font-family:'Geist Mono',monospace; font-weight:600; }
+.dial-callers { display:flex; gap:4px; margin-left:auto; align-items:center; flex-wrap:wrap; }
+.dial-caller-btn {
+  font-size:11px; font-family:'Geist Mono',monospace;
+  padding:4px 11px; border-radius:5px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  cursor:pointer; transition:all 0.12s;
+}
+.dial-caller-btn:hover { color:var(--text); border-color:var(--border-hover); }
+.dial-caller-btn.dc-active { background:var(--gold); color:#000; border-color:var(--gold); font-weight:700; }
+
+/* ── CARD STATUS BADGE ── */
+.csb { font-size:9.5px; font-family:'Geist Mono',monospace; padding:2px 7px; border-radius:4px; font-weight:600; flex-shrink:0; }
+.csb-no-answer { background:rgba(100,100,100,0.2); color:#888; border:1px solid #555; }
+.csb-spoke      { background:rgba(76,159,216,0.15); color:#4c9fd8; border:1px solid rgba(76,159,216,0.35); }
+.csb-demo       { background:rgba(34,197,94,0.15);  color:#22c55e; border:1px solid rgba(34,197,94,0.35); }
+.csb-not-interested { background:rgba(239,68,68,0.1); color:#ef4444; border:1px solid rgba(239,68,68,0.3); }
+.csb-dnc        { background:rgba(220,38,38,0.18); color:#dc2626; border:1px solid #dc2626; }
+
+/* ── SIGNAL BRIEF TAB ── */
+.sb-wrapper { padding:2px 0 8px; }
+.sb-section { border:1px solid var(--border); border-radius:6px; margin-bottom:8px; overflow:hidden; cursor:pointer; transition:border-color 0.12s; }
+.sb-section:hover { border-color:var(--border-hover); }
+.sb-section-hdr { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; user-select:none; }
+.sb-section-label { font-size:10px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--gold); letter-spacing:0.08em; }
+.sb-chevron { font-size:10px; color:var(--muted); transition:transform 0.15s; letter-spacing:0; text-transform:none; font-weight:normal; }
+.sb-section.sb-open .sb-chevron { transform:rotate(180deg); }
+.sb-section-body { display:none; padding:0 12px 12px; border-top:1px solid var(--border); }
+.sb-section.sb-open .sb-section-body { display:block; }
+.sb-opening-line { font-size:13px; font-style:italic; color:var(--text); line-height:1.65; padding:10px 0 6px; }
+.sb-context { font-size:11.5px; color:var(--muted); line-height:1.5; }
+.sb-service { padding:8px 0; border-bottom:1px solid var(--border); }
+.sb-service:last-child { border-bottom:none; }
+.sb-priority-label { font-size:9.5px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--gold); letter-spacing:0.08em; margin-bottom:3px; }
+.sb-p2 .sb-priority-label { color:var(--muted); }
+.sb-service-name { font-size:13px; font-weight:600; color:var(--text); margin-bottom:3px; }
+.sb-service-why { font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:4px; }
+.sb-roi-line { font-size:11.5px; color:var(--green); font-family:'Geist Mono',monospace; }
+.sb-pain-quote { border-left:3px solid var(--gold); padding:8px 0 8px 12px; font-size:14px; font-weight:600; color:var(--text); line-height:1.6; margin-top:8px; }
+
+/* ── CALL LOG SECTION ── */
+.call-log-wrap { border-top:2px solid var(--border); padding:16px; background:rgba(0,0,0,0.25); }
+.cl-title { font-size:10px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--muted); letter-spacing:0.1em; margin-bottom:12px; }
+.cl-status-row { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px; }
+.cl-sbtn {
+  font-size:11px; padding:5px 10px; border-radius:5px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  cursor:pointer; font-family:'Geist Mono',monospace; transition:all 0.12s; white-space:nowrap;
+}
+.cl-sbtn:hover { border-color:var(--border-hover); color:var(--text); }
+.cl-sbtn.cl-active { color:#000 !important; font-weight:700; }
+.cl-caller-row { display:flex; gap:5px; margin-bottom:12px; align-items:center; }
+.cl-caller-label { font-size:10px; color:var(--muted); font-family:'Geist Mono',monospace; margin-right:2px; }
+.cl-cbtn {
+  font-size:11px; padding:4px 12px; border-radius:5px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  cursor:pointer; font-family:'Geist Mono',monospace; transition:all 0.12s;
+}
+.cl-cbtn.cl-caller-active { background:rgba(212,170,80,0.15); color:var(--gold); border-color:var(--gold); }
+.cl-note-row { display:flex; gap:7px; margin-bottom:14px; }
+.cl-note-input {
+  flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:5px;
+  padding:7px 10px; font-family:'Geist Mono',monospace; font-size:12px; color:var(--text); outline:none;
+  transition:border-color 0.12s;
+}
+.cl-note-input:focus { border-color:var(--gold); }
+.cl-save-btn {
+  background:var(--gold); color:#000; border:none; border-radius:5px;
+  padding:7px 14px; font-size:12px; font-family:'Geist Mono',monospace; font-weight:700; cursor:pointer;
+}
+.cl-save-btn:hover { opacity:0.85; }
+.cl-hist-label { font-size:9.5px; font-family:'Geist Mono',monospace; color:var(--muted); letter-spacing:0.08em; margin-bottom:5px; }
+.cl-entry { padding:7px 0; border-top:1px solid var(--border); }
+.cl-entry-top { display:flex; align-items:center; gap:6px; margin-bottom:3px; flex-wrap:wrap; }
+.cl-entry-badge { font-size:10px; padding:2px 7px; border-radius:4px; font-family:'Geist Mono',monospace; font-weight:600; }
+.cl-entry-meta { font-size:10.5px; color:var(--muted); font-family:'Geist Mono',monospace; }
+.cl-entry-note { font-size:11.5px; color:var(--text); line-height:1.4; padding-left:2px; }
+.cl-empty { font-size:11px; color:var(--muted); font-style:italic; padding:6px 0; }
+
+/* ── PROFILE BANNER (DNC / DEMO) ── */
+.profile-banner { padding:11px 16px; font-size:13px; font-weight:600; font-family:'Geist Mono',monospace; display:flex; align-items:center; gap:8px; }
+.pb-demo { background:rgba(34,197,94,0.12); color:#22c55e; border-bottom:1px solid rgba(34,197,94,0.25); }
+.pb-dnc  { background:rgba(220,38,38,0.12); color:#dc2626; border-bottom:1px solid rgba(220,38,38,0.25); }
+
+/* ── TOAST ── */
+.toast-wrap { position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:7px; pointer-events:none; }
+.toast {
+  background:var(--card); border:1px solid var(--border); border-left:3px solid var(--gold);
+  border-radius:6px; padding:10px 14px; font-family:'Geist Mono',monospace; font-size:12px; color:var(--text);
+  max-width:260px; opacity:0; transform:translateY(10px);
+  transition:all 0.22s cubic-bezier(0.34,1.56,0.64,1); pointer-events:none;
+}
+.toast.t-demo { border-left-color:#22c55e; }
+.toast.t-show { opacity:1; transform:translateY(0); }
+
+/* ── DEMO FLASH ── */
+#demoFlash { position:fixed; inset:0; z-index:9998; background:rgba(212,170,80,0.1); pointer-events:none; opacity:0; transition:opacity 0.1s; }
+
+/* ── DRAWER LAYOUT FIXES ── */
+#profileBanner { flex-shrink:0; }
+.call-log-wrap { flex-shrink:0; overflow-y:auto; max-height:42vh; }
 </style>
 </head>
 <body>
@@ -1119,6 +1243,23 @@ html, body {
     </div>
   </div>
 
+  <!-- DIAL BAR -->
+  <div class="dial-bar" id="dialBar">
+    <div class="dial-stat"><span class="dial-stat-num" id="db-called">0</span> called · no answer</div>
+    <div class="dial-stat"><span class="dial-stat-num" id="db-spoke">0</span> spoke · follow up</div>
+    <div class="dial-stat"><span class="dial-stat-num d-demos" id="db-demos">0</span> 🔥 demos</div>
+    <div class="dial-stat"><span class="dial-stat-num d-dnc" id="db-dnc">0</span> DNC/dead</div>
+    <div class="dial-stat"><span class="dial-stat-num" id="db-remaining">708</span> remaining</div>
+    <div class="dial-sep"></div>
+    <span class="dial-session" id="db-session" style="display:none">Today: <span id="db-session-n">0</span> demos</span>
+    <div class="dial-callers">
+      <button class="dial-caller-btn dc-active" id="dcb-all" onclick="setCallerFilter(null,this)">All</button>
+      <button class="dial-caller-btn" id="dcb-0" onclick="setCallerFilter(0,this)">Andrew</button>
+      <button class="dial-caller-btn" id="dcb-1" onclick="setCallerFilter(1,this)">Sofia</button>
+      <button class="dial-caller-btn" id="dcb-2" onclick="setCallerFilter(2,this)">Marcus</button>
+    </div>
+  </div>
+
   <!-- VERTICAL INTELLIGENCE ENGINE -->
   <div id="vip-panel">
     <div class="vip-header" onclick="toggleVIP()">
@@ -1215,15 +1356,23 @@ html, body {
       <div class="dtab" data-dtab="script" onclick="switchDTab('script',this)">Script</div>
       <div class="dtab" data-dtab="contact" onclick="switchDTab('contact',this)">Contact</div>
       <div class="dtab" data-dtab="objections" onclick="switchDTab('objections',this)">Objections</div>
+      <div class="dtab" data-dtab="signal" onclick="switchDTab('signal',this)" style="color:var(--gold)">📡 Signal</div>
     </div>
+    <div id="profileBanner"></div>
     <div class="drawer-body" id="drawerBody">
       <div class="dtab-content active" id="dtab-overview"></div>
       <div class="dtab-content" id="dtab-script"></div>
       <div class="dtab-content" id="dtab-contact"></div>
       <div class="dtab-content" id="dtab-objections"></div>
+      <div class="dtab-content" id="dtab-signal"></div>
     </div>
+    <div class="call-log-wrap" id="callLogWrap"></div>
   </div>
 </div>
+
+<!-- TOAST + FLASH -->
+<div class="toast-wrap" id="toastWrap"></div>
+<div id="demoFlash"></div>
 
 <script>
 const OBJECTIONS = [
@@ -2518,12 +2667,14 @@ function render() {
   }
   empty.classList.remove('show');
 
+  list = list.filter(b => matchCallerFilter(b));
   grid.innerHTML = list.map(b => {
     const speed = (b.tags||[]).includes('same-day') ? '🔥 Today' :
                   (b.tags||[]).includes('walk-in') ? '🚶 Walk-in' :
                   b.closeSpeed || '';
     const pClass = b.priority && b.priority <= 5 ? 'priority-top' :
                    b.priority ? 'priority-mid' : '';
+    const badge  = cardStatusBadge(b.id);
     return `<div class="biz-card ${pClass}" onclick="openDrawer(${b.id})">
       <div class="card-top">
         <div class="card-scan-badge">S${b.scan}</div>
@@ -2535,6 +2686,7 @@ function render() {
           <span class="tag tag-ind">${IND_LABELS[b.industry]||b.industry}</span>
           ${b.hipaa ? '<span class="tag tag-hipaa">HIPAA</span>' : ''}
           ${b.productTag ? `<span class="tag tag-product">${b.productTag}</span>` : ''}
+          ${badge}
         </div>
       </div>
       <div class="card-divider"></div>
@@ -2670,6 +2822,16 @@ function openDrawer(id) {
     <div class="d-section"><div class="d-label">Universal Objection Handlers</div>${objs}</div>
     <div class="script-note">💡 In Greenwich-Stamford, always establish your local presence in the first 60 seconds.</div>
   `;
+
+  // Signal Brief tab
+  document.getElementById('dtab-signal').innerHTML = renderSignalBrief(b);
+
+  // Profile banner (DNC / Demo guard)
+  activeLeadId = id;
+  document.getElementById('profileBanner').innerHTML = renderProfileBanner(id);
+
+  // Call log section
+  document.getElementById('callLogWrap').innerHTML = renderCallLog(id);
 
   // Reset to overview tab
   switchDTab('overview', document.querySelector('[data-dtab="overview"]'));
@@ -2872,10 +3034,237 @@ function initSections() {
   });
 }
 
+// ══���═══════════════════════════════════════
+// ── CALL LOG + SIGNAL BRIEF SYSTEM ──
+// ══════════════════════════════════════════
+
+const CALLERS = ['Andrew', 'Sofia', 'Marcus'];
+const CL_STATUSES = [
+  { val:'not-called',     label:'○ Not Called',        color:'#555',    bg:'transparent' },
+  { val:'no-answer',      label:'📞 No Answer',        color:'#888',    bg:'rgba(100,100,100,0.2)' },
+  { val:'spoke',          label:'✓ Spoke · Follow Up', color:'#4c9fd8', bg:'rgba(76,159,216,0.15)' },
+  { val:'demo',           label:'🔥 Demo Booked',      color:'#22c55e', bg:'rgba(34,197,94,0.15)' },
+  { val:'not-interested', label:'✗ Not Interested',    color:'#ef4444', bg:'rgba(239,68,68,0.1)' },
+  { val:'dnc',            label:'🚫 DNC',              color:'#dc2626', bg:'rgba(220,38,38,0.18)' },
+];
+
+const LOG_CACHE = {};
+let sessionDemos = parseInt(sessionStorage.getItem('4tw_sess_demos')||'0');
+let sessionCalls  = parseInt(sessionStorage.getItem('4tw_sess_calls')||'0');
+let callerFilter  = null;
+let activeLeadId  = null;
+
+// ── STORAGE ──
+function getLog(id) {
+  if (LOG_CACHE[id] != null) return LOG_CACHE[id];
+  try {
+    const raw = localStorage.getItem('4tw_log_'+id);
+    LOG_CACHE[id] = raw ? JSON.parse(raw) : { status:'not-called', entries:[] };
+  } catch(e) { LOG_CACHE[id] = { status:'not-called', entries:[] }; }
+  return LOG_CACHE[id];
+}
+function saveLog(id, data) {
+  LOG_CACHE[id] = data;
+  localStorage.setItem('4tw_log_'+id, JSON.stringify(data));
+  updateDashboard();
+  render();
+}
+function getActiveCaller() { return localStorage.getItem('4tw_caller') || CALLERS[0]; }
+function setActiveCaller(name) { localStorage.setItem('4tw_caller', name); }
+
+// ── SIGNAL BRIEF RENDERER ──
+function renderSignalBrief(b) {
+  const p1 = (b.services||[])[0];
+  const p2 = (b.services||[])[1];
+  const r  = b.reasoning || [];
+  const sA = `<div class="sb-section" onclick="toggleSBSection(this)">
+    <div class="sb-section-hdr"><span class="sb-section-label">A — THE OPENING ANGLE</span><span class="sb-chevron">▾</span></div>
+    <div class="sb-section-body">
+      <div class="sb-opening-line">"${(b.openingLine||b.pitch||'—').replace(/"/g,'&quot;')}"</div>
+      ${r[1]?`<div class="sb-context" style="margin-top:6px;">${r[1]}</div>`:''}
+    </div></div>`;
+  const sB = `<div class="sb-section" onclick="toggleSBSection(this)">
+    <div class="sb-section-hdr"><span class="sb-section-label">B — WHAT WE OFFER THEM</span><span class="sb-chevron">▾</span></div>
+    <div class="sb-section-body">
+      ${p1?`<div class="sb-service"><div class="sb-priority-label">PRIORITY 1</div><div class="sb-service-name">${p1.name}</div><div class="sb-service-why">${p1.why}</div><div class="sb-roi-line">💰 ${r[2]||(b.dealSize+' · '+b.closeSpeed)}</div></div>`:''}
+      ${p2?`<div class="sb-service sb-p2"><div class="sb-priority-label">PRIORITY 2</div><div class="sb-service-name">${p2.name}</div><div class="sb-service-why">${p2.why}</div></div>`:''}
+    </div></div>`;
+  const sC = `<div class="sb-section" onclick="toggleSBSection(this)">
+    <div class="sb-section-hdr"><span class="sb-section-label">C — DOCUMENTED PAIN</span><span class="sb-chevron">▾</span></div>
+    <div class="sb-section-body">
+      <div class="sb-pain-quote">${b.pain||'—'}</div>
+      ${r[3]?`<div class="sb-context" style="margin-top:8px;">${r[3]}</div>`:''}
+    </div></div>`;
+  return `<div class="sb-wrapper">${sA}${sB}${sC}</div>`;
+}
+function toggleSBSection(el) { el.classList.toggle('sb-open'); }
+
+// ── CALL LOG RENDERER ──
+function renderCallLog(id) {
+  const log    = getLog(id);
+  const caller = getActiveCaller();
+  const statusBtns = CL_STATUSES.map(s => {
+    const on  = log.status === s.val;
+    const sty = on ? `background:${s.bg};color:${s.color};border-color:${s.color};` : '';
+    return `<button class="cl-sbtn${on?' cl-active':''}" style="${sty}" onclick="setLeadStatus(${id},'${s.val}')">${s.label}</button>`;
+  }).join('');
+  const callerBtns = CALLERS.map(c =>
+    `<button class="cl-cbtn${c===caller?' cl-caller-active':''}" onclick="selectCaller('${c}',this)">${c}</button>`
+  ).join('');
+  const recent  = (log.entries||[]).slice(0,3);
+  const histHTML = recent.length === 0
+    ? `<div class="cl-empty">No calls logged yet.</div>`
+    : recent.map(e => {
+        const st = CL_STATUSES.find(s=>s.val===e.status)||CL_STATUSES[0];
+        const ts = new Date(e.ts).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit',hour12:true});
+        return `<div class="cl-entry">
+          <div class="cl-entry-top">
+            <span class="cl-entry-badge" style="background:${st.bg};color:${st.color};border:1px solid ${st.color};">${st.label}</span>
+            <span class="cl-entry-meta">${e.caller} · ${ts}</span>
+          </div>
+          ${e.note?`<div class="cl-entry-note">${e.note}</div>`:''}
+        </div>`;
+      }).join('');
+  return `<div class="cl-title">CALL LOG</div>
+    <div class="cl-status-row">${statusBtns}</div>
+    <div class="cl-caller-row"><span class="cl-caller-label">CALLER:</span>${callerBtns}</div>
+    <div class="cl-note-row">
+      <input class="cl-note-input" id="cl-note-${id}" maxlength="200" placeholder="Key detail, objection, callback time...">
+      <button class="cl-save-btn" onclick="logCall(${id})">Log</button>
+    </div>
+    <div class="cl-hist-label">RECENT ACTIVITY</div>
+    ${histHTML}`;
+}
+
+// ── LOG ACTIONS ──
+function setLeadStatus(id, status) {
+  const log = getLog(id);
+  const wasDemo = log.status === 'demo';
+  log.status = status;
+  if (!log.entries.length && status !== 'not-called')
+    log.entries.unshift({ ts:Date.now(), caller:getActiveCaller(), status, note:'' });
+  saveLog(id, log);
+  if (status === 'demo' && !wasDemo) {
+    sessionDemos++;
+    sessionStorage.setItem('4tw_sess_demos', sessionDemos);
+    document.getElementById('db-session-n').textContent = sessionDemos;
+    document.getElementById('db-session').style.display = '';
+    triggerDemoFlash(id);
+  }
+  if (activeLeadId === id) refreshLogUI(id);
+}
+function logCall(id) {
+  const input = document.getElementById('cl-note-'+id);
+  if (!input) return;
+  const note = input.value.trim();
+  const log  = getLog(id);
+  if (log.status === 'not-called') log.status = 'no-answer';
+  log.entries.unshift({ ts:Date.now(), caller:getActiveCaller(), status:log.status, note });
+  log.entries = log.entries.slice(0,20);
+  saveLog(id, log);
+  sessionCalls++;
+  sessionStorage.setItem('4tw_sess_calls', sessionCalls);
+  if (sessionCalls > 0 && sessionCalls % 10 === 0) showToast(`${sessionCalls} calls. Keep going.`);
+  if (activeLeadId === id) refreshLogUI(id);
+}
+function selectCaller(name, btn) {
+  setActiveCaller(name);
+  document.querySelectorAll('.cl-cbtn').forEach(b=>b.classList.remove('cl-caller-active'));
+  if (btn) btn.classList.add('cl-caller-active');
+}
+function refreshLogUI(id) {
+  const wrapEl = document.getElementById('callLogWrap');
+  const bannEl = document.getElementById('profileBanner');
+  if (wrapEl) wrapEl.innerHTML = renderCallLog(id);
+  if (bannEl) bannEl.innerHTML = renderProfileBanner(id);
+}
+
+// ── PROFILE BANNER ──
+function renderProfileBanner(id) {
+  const log   = getLog(id);
+  const entry = (log.entries||[])[0];
+  const note  = entry && entry.note ? ` — ${entry.note}` : '';
+  if (log.status === 'demo') return `<div class="profile-banner pb-demo">🔥 DEMO SCHEDULED${note}</div>`;
+  if (log.status === 'dnc')  return `<div class="profile-banner pb-dnc">🚫 DO NOT CALL${note}</div>`;
+  return '';
+}
+
+// ── DASHBOARD ──
+function updateDashboard() {
+  let called=0, spoke=0, demos=0, dnc=0, remaining=0;
+  BUSINESSES.forEach(b => {
+    const s = getLog(b.id).status;
+    if      (s==='no-answer')      called++;
+    else if (s==='spoke')          spoke++;
+    else if (s==='demo')           demos++;
+    else if (s==='dnc'||s==='not-interested') dnc++;
+    else remaining++;
+  });
+  document.getElementById('db-called').textContent    = called;
+  document.getElementById('db-spoke').textContent     = spoke;
+  document.getElementById('db-demos').textContent     = demos;
+  document.getElementById('db-dnc').textContent       = dnc;
+  document.getElementById('db-remaining').textContent = remaining;
+}
+
+// ── CALLER FILTER ──
+function setCallerFilter(idx, btn) {
+  callerFilter = idx === null ? null : CALLERS[idx];
+  document.querySelectorAll('.dial-caller-btn').forEach(b=>b.classList.remove('dc-active'));
+  if (btn) btn.classList.add('dc-active');
+  render();
+}
+function matchCallerFilter(b) {
+  if (callerFilter === null) return true;
+  return (getLog(b.id).entries||[]).some(e=>e.caller===callerFilter);
+}
+
+// ── STATUS BADGE FOR CARDS ──
+function cardStatusBadge(id) {
+  const log = getLog(id);
+  if (log.status==='not-called') return '';
+  const st = CL_STATUSES.find(s=>s.val===log.status);
+  if (!st) return '';
+  const cls = {'no-answer':'csb-no-answer','spoke':'csb-spoke','demo':'csb-demo','not-interested':'csb-not-interested','dnc':'csb-dnc'}[log.status]||'';
+  return `<span class="csb ${cls}">${st.label}</span>`;
+}
+
+// ── GAMIFICATION ──
+function triggerDemoFlash(id) {
+  const b     = BUSINESSES.find(x=>x.id===id);
+  const flash = document.getElementById('demoFlash');
+  flash.style.opacity = '1';
+  setTimeout(()=>{ flash.style.opacity='0'; }, 500);
+  showToast(`🔥 DEMO BOOKED — ${b?b.name:''}`, 'demo');
+}
+function showToast(msg, type) {
+  const wrap = document.getElementById('toastWrap');
+  if (!wrap) return;
+  const t = document.createElement('div');
+  t.className = 'toast'+(type==='demo'?' t-demo':'');
+  t.textContent = msg;
+  wrap.appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('t-show')));
+  setTimeout(()=>{ t.classList.remove('t-show'); setTimeout(()=>t.remove(),300); }, 3500);
+}
+
+// ── CROSS-TAB SYNC ──
+window.addEventListener('storage', e => {
+  if (!e.key || !e.key.startsWith('4tw_log_')) return;
+  const id = parseInt(e.key.replace('4tw_log_',''));
+  if (!isNaN(id)) { delete LOG_CACHE[id]; if (activeLeadId===id) refreshLogUI(id); }
+  updateDashboard(); render();
+});
+
 // ── INIT ──
 updateCounts();
 updateVIPCounts();
 initSections();
+updateDashboard();
+if (sessionDemos > 0) {
+  document.getElementById('db-session-n').textContent = sessionDemos;
+  document.getElementById('db-session').style.display = '';
+}
 render();
 </script>
 <script src="password-gate.js"></script>
