@@ -903,26 +903,82 @@ html, body {
 .csb-not-interested { background:rgba(239,68,68,0.1); color:#ef4444; border:1px solid rgba(239,68,68,0.3); }
 .csb-dnc        { background:rgba(220,38,38,0.18); color:#dc2626; border:1px solid #dc2626; }
 
-/* ── SIGNAL BRIEF TAB ── */
-.sb-wrapper { padding:2px 0 8px; }
-.sb-section { border:1px solid var(--border); border-radius:6px; margin-bottom:8px; overflow:hidden; cursor:pointer; transition:border-color 0.12s; }
-.sb-section:hover { border-color:var(--border-hover); }
-.sb-section-hdr { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; user-select:none; }
-.sb-section-label { font-size:10px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--gold); letter-spacing:0.08em; }
-.sb-chevron { font-size:10px; color:var(--muted); transition:transform 0.15s; letter-spacing:0; text-transform:none; font-weight:normal; }
-.sb-section.sb-open .sb-chevron { transform:rotate(180deg); }
-.sb-section-body { display:none; padding:0 12px 12px; border-top:1px solid var(--border); }
-.sb-section.sb-open .sb-section-body { display:block; }
-.sb-opening-line { font-size:13px; font-style:italic; color:var(--text); line-height:1.65; padding:10px 0 6px; }
-.sb-context { font-size:11.5px; color:var(--muted); line-height:1.5; }
-.sb-service { padding:8px 0; border-bottom:1px solid var(--border); }
-.sb-service:last-child { border-bottom:none; }
-.sb-priority-label { font-size:9.5px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--gold); letter-spacing:0.08em; margin-bottom:3px; }
-.sb-p2 .sb-priority-label { color:var(--muted); }
-.sb-service-name { font-size:13px; font-weight:600; color:var(--text); margin-bottom:3px; }
-.sb-service-why { font-size:12px; color:var(--muted); line-height:1.5; margin-bottom:4px; }
-.sb-roi-line { font-size:11.5px; color:var(--green); font-family:'Geist Mono',monospace; }
-.sb-pain-quote { border-left:3px solid var(--gold); padding:8px 0 8px 12px; font-size:14px; font-weight:600; color:var(--text); line-height:1.6; margin-top:8px; }
+/* ── SIGNAL BRIEF v2 ── */
+/* Battle card */
+.sb2-battle { background:rgba(212,170,80,0.06); border:1px solid rgba(212,170,80,0.22); border-radius:8px; padding:12px 14px; margin-bottom:8px; }
+.sb2-battle-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:12px; }
+.sb2-cell { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:5px; padding:7px 9px; }
+.sb2-cell-label { font-size:8.5px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--muted); letter-spacing:0.1em; margin-bottom:3px; }
+.sb2-cell-val { font-size:12px; font-weight:600; color:var(--text); line-height:1.35; }
+.sb2-cell-val.sb2-accent { color:var(--gold); }
+.sb2-opener { font-size:14px; font-weight:700; color:var(--text); line-height:1.6; font-style:italic; border-top:1px solid rgba(212,170,80,0.2); padding-top:11px; margin-top:2px; }
+
+/* Collapsible sections */
+.sb2-section { border:1px solid var(--border); border-radius:6px; margin-bottom:6px; overflow:hidden; }
+.sb2-section-hdr { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; cursor:pointer; user-select:none; transition:background 0.1s; }
+.sb2-section-hdr:hover { background:rgba(255,255,255,0.03); }
+.sb2-section-label { font-size:10px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--gold); letter-spacing:0.08em; }
+.sb2-chevron { font-size:10px; color:var(--muted); transition:transform 0.15s; }
+.sb2-section.sb2-open .sb2-section-hdr .sb2-chevron { transform:rotate(180deg); }
+.sb2-section-body { display:none; border-top:1px solid var(--border); padding:12px; }
+.sb2-section.sb2-open .sb2-section-body { display:block; }
+
+/* Conversation flow steps */
+.sb2-step { border:1px solid var(--border); border-radius:5px; margin-bottom:6px; overflow:hidden; }
+.sb2-step-hdr { display:flex; justify-content:space-between; align-items:center; padding:8px 11px; cursor:pointer; user-select:none; }
+.sb2-step-hdr:hover { background:rgba(255,255,255,0.03); }
+.sb2-step-num { font-size:8.5px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--gold); margin-bottom:1px; letter-spacing:0.08em; }
+.sb2-step-title { font-size:11.5px; font-weight:600; color:var(--text); }
+.sb2-step.sb2-open .sb2-step-hdr .sb2-chevron { transform:rotate(180deg); }
+.sb2-step-body { display:none; border-top:1px solid var(--border); padding:10px 11px; background:rgba(0,0,0,0.12); }
+.sb2-step.sb2-open .sb2-step-body { display:block; }
+.sb2-step-content { font-size:12.5px; color:var(--text); line-height:1.65; }
+.sb2-step-branch { margin-bottom:10px; border-left:2px solid rgba(212,170,80,0.3); padding-left:10px; }
+.sb2-step-branch:last-child { margin-bottom:0; }
+.sb2-branch-if { font-size:9.5px; font-family:'Geist Mono',monospace; color:var(--gold); font-weight:700; margin-bottom:4px; letter-spacing:0.05em; }
+.sb2-branch-say { font-size:12.5px; color:var(--text); line-height:1.6; font-style:italic; }
+
+/* Before / After */
+.sb2-ba { display:grid; grid-template-columns:1fr 1fr; margin-bottom:7px; border:1px solid var(--border); border-radius:5px; overflow:hidden; }
+.sb2-before { padding:8px 10px; background:rgba(239,68,68,0.05); border-right:1px solid var(--border); }
+.sb2-after { padding:8px 10px; background:rgba(34,197,94,0.05); }
+.sb2-ba-label { font-size:8px; font-family:'Geist Mono',monospace; font-weight:700; letter-spacing:0.1em; margin-bottom:4px; }
+.sb2-before .sb2-ba-label { color:#ef4444; }
+.sb2-after .sb2-ba-label { color:#22c55e; }
+.sb2-ba-text { font-size:11.5px; color:var(--text); line-height:1.5; }
+
+/* Market intel */
+.sb2-intel-item { padding:7px 0; border-bottom:1px solid var(--border); font-size:12px; color:var(--text); line-height:1.55; }
+.sb2-intel-item:last-child { border-bottom:none; }
+.sb2-intel-item::before { content:'◆'; color:var(--gold); font-size:7px; margin-right:8px; vertical-align:middle; }
+
+/* Objections */
+.sb2-obj { border:1px solid var(--border); border-radius:5px; margin-bottom:5px; overflow:hidden; }
+.sb2-obj-q { padding:9px 12px; font-size:12px; font-style:italic; color:var(--text); display:flex; justify-content:space-between; align-items:center; gap:8px; cursor:pointer; user-select:none; }
+.sb2-obj-q:hover { background:rgba(255,255,255,0.03); }
+.sb2-obj-arrow { font-size:10px; color:var(--muted); flex-shrink:0; transition:transform 0.15s; }
+.sb2-obj.sb2-open .sb2-obj-arrow { transform:rotate(180deg); }
+.sb2-obj-a { display:none; padding:9px 12px 11px; font-size:12.5px; color:var(--gold); line-height:1.65; border-top:1px solid var(--border); background:rgba(0,0,0,0.12); }
+.sb2-obj.sb2-open .sb2-obj-a { display:block; }
+
+/* Voicemail */
+.sb2-vm { background:rgba(0,0,0,0.18); border:1px solid var(--border); border-radius:5px; padding:13px 14px; font-size:13px; color:var(--text); line-height:1.7; font-style:italic; }
+.sb2-vm-note { font-size:9.5px; font-family:'Geist Mono',monospace; color:var(--muted); margin-top:9px; font-style:normal; letter-spacing:0.05em; }
+
+/* GEO demo */
+.sb2-geo-row { margin-bottom:11px; }
+.sb2-geo-row:last-child { margin-bottom:0; }
+.sb2-geo-label { font-size:8.5px; font-family:'Geist Mono',monospace; font-weight:700; color:var(--muted); letter-spacing:0.1em; margin-bottom:4px; }
+.sb2-geo-query { background:rgba(255,255,255,0.05); border:1px solid rgba(212,170,80,0.3); border-radius:5px; padding:10px 12px; font-family:'Geist Mono',monospace; font-size:13px; color:var(--gold); cursor:pointer; transition:border-color 0.1s; }
+.sb2-geo-query:hover { border-color:var(--gold); }
+.sb2-geo-text { font-size:12.5px; color:var(--text); line-height:1.55; font-style:italic; }
+.sb2-geo-text.sb2-gold { color:var(--gold); font-weight:600; font-style:normal; }
+
+/* Quick reference strip — sticky */
+.sb2-strip { position:sticky; bottom:-20px; margin:8px -20px -20px; background:rgba(8,8,8,0.96); border-top:2px solid var(--border); padding:10px 20px; display:flex; gap:8px; flex-wrap:wrap; align-items:center; z-index:10; backdrop-filter:blur(4px); }
+.sb2-strip-item { font-size:10px; font-family:'Geist Mono',monospace; padding:4px 10px; border-radius:4px; border:1px solid var(--border); background:rgba(255,255,255,0.03); white-space:nowrap; }
+.sb2-strip-item.sb2-gold { color:var(--gold); border-color:rgba(212,170,80,0.3); background:rgba(212,170,80,0.08); }
+.sb2-strip-label { color:var(--muted); margin-right:4px; }
 
 /* ── CALL LOG SECTION ── */
 .call-log-wrap { border-top:2px solid var(--border); padding:16px; background:rgba(0,0,0,0.25); }
@@ -3043,32 +3099,304 @@ function saveLog(id, data) {
   updateDashboard();
   render();
 }
-// ── SIGNAL BRIEF RENDERER ──
-function renderSignalBrief(b) {
-  const p1 = (b.services||[])[0];
-  const p2 = (b.services||[])[1];
-  const r  = b.reasoning || [];
-  const sA = `<div class="sb-section" onclick="toggleSBSection(this)">
-    <div class="sb-section-hdr"><span class="sb-section-label">A — THE OPENING ANGLE</span><span class="sb-chevron">▾</span></div>
-    <div class="sb-section-body">
-      <div class="sb-opening-line">"${(b.openingLine||b.pitch||'—').replace(/"/g,'&quot;')}"</div>
-      ${r[1]?`<div class="sb-context" style="margin-top:6px;">${r[1]}</div>`:''}
-    </div></div>`;
-  const sB = `<div class="sb-section" onclick="toggleSBSection(this)">
-    <div class="sb-section-hdr"><span class="sb-section-label">B — WHAT WE OFFER THEM</span><span class="sb-chevron">▾</span></div>
-    <div class="sb-section-body">
-      ${p1?`<div class="sb-service"><div class="sb-priority-label">PRIORITY 1</div><div class="sb-service-name">${p1.name}</div><div class="sb-service-why">${p1.why}</div><div class="sb-roi-line">💰 ${r[2]||(b.dealSize+' · '+b.closeSpeed)}</div></div>`:''}
-      ${p2?`<div class="sb-service sb-p2"><div class="sb-priority-label">PRIORITY 2</div><div class="sb-service-name">${p2.name}</div><div class="sb-service-why">${p2.why}</div></div>`:''}
-    </div></div>`;
-  const sC = `<div class="sb-section" onclick="toggleSBSection(this)">
-    <div class="sb-section-hdr"><span class="sb-section-label">C — DOCUMENTED PAIN</span><span class="sb-chevron">▾</span></div>
-    <div class="sb-section-body">
-      <div class="sb-pain-quote">${b.pain||'—'}</div>
-      ${r[3]?`<div class="sb-context" style="margin-top:8px;">${r[3]}</div>`:''}
-    </div></div>`;
-  return `<div class="sb-wrapper">${sA}${sB}${sC}</div>`;
+// ── SIGNAL BRIEF v2 ──────────────────────────────────────────
+
+function sbOwnerName(b) {
+  const dm = b.dm || '';
+  const contact = b.contact || '';
+  const src = dm.includes('★') ? contact : dm;
+  const n = src.split(/[\s,|]/)[0];
+  return (!n || n === 'Via' || n === 'Owner' || n.length < 2) ? 'there' : n;
 }
-function toggleSBSection(el) { el.classList.toggle('sb-open'); }
+
+function sbJobVal(b) {
+  const tags = b.tags || [];
+  if (tags.includes('texas-dfw')) return '$18K–$35K';
+  if (tags.includes('denver-co')) return '$12K–$18K';
+  const text = [(b.reasoning||[]).join(' '), b.pitch||'', b.context||''].join(' ');
+  const m = text.match(/\$[\d,.]+[Kk][–—-]+\$[\d,.]+[Kk]/);
+  if (m) return m[0];
+  return b.dealSize || '—';
+}
+
+function sbRetainerMult(b) {
+  const jt = sbJobVal(b);
+  const jm = jt.match(/\$([\d,.]+)([Kk]?)/);
+  if (!jm) return '—';
+  let low = parseFloat(jm[1].replace(/,/g,''));
+  if (jm[2].toLowerCase() === 'k') low *= 1000;
+  const pm = (b.dealSize||'').match(/\$([\d,]+)\/mo/);
+  if (!pm) return '—';
+  const mo = parseFloat(pm[1].replace(/,/g,''));
+  if (!mo) return '—';
+  return Math.round(low / mo) + '×';
+}
+
+function sbMarketDesc(b) {
+  const tags = b.tags || [];
+  if (tags.includes('texas-dfw')) return 'DFW hail corridor — avg job $18K–$35K';
+  if (tags.includes('denver-co')) return 'Front Range storm season — avg job $12K–$18K';
+  if (tags.includes('greenwich')) return 'Greenwich CT — highest per-capita income in state';
+  if (tags.includes('stamford')) return 'Stamford CT — Fairfield County commercial hub';
+  return ((b.reasoning||[''])[0].split('.')[0] || b.city).trim();
+}
+
+function sbGap(b) {
+  return (b.pain||'').split('.')[0].replace(/^[^:]+:\s*/, '').trim() || '—';
+}
+
+function sbParseRating(b) {
+  const m = (b.dm||'').match(/([\d.]+)★\s*(\d+)\s*reviews?/i);
+  return m ? { rating: parseFloat(m[1]), reviews: parseInt(m[2]) } : null;
+}
+
+function sbTrade(b) {
+  const txt = (b.name + ' ' + (b.services||[]).map(s=>s.name).join(' ')).toLowerCase();
+  const tags = b.tags || [];
+  if (txt.includes('roof') || tags.includes('scan9') || tags.includes('scan10')) return 'roofing contractor';
+  if (txt.includes('plumb')) return 'plumber';
+  if (txt.includes('hvac') || txt.includes('heat')) return 'HVAC contractor';
+  if (b.industry === 'healthcare') return 'doctor';
+  if (b.industry === 'hospitality') return 'restaurant';
+  if (b.industry === 'finance') return 'financial advisor';
+  if (b.industry === 'legal') return 'attorney';
+  return 'local business';
+}
+
+function sbBeforeAfters(b) {
+  const svcNames = (b.services||[]).map(s => s.name.toLowerCase());
+  const city = b.city.split(',')[0];
+  const trade = sbTrade(b).split(' ')[0];
+  const rating = sbParseRating(b);
+  const pairs = [];
+
+  const hasAI = svcNames.some(n => n.includes('ai') || n.includes('voice') || n.includes('recept') || n.includes('missed') || n.includes('sms'));
+  if (hasAI) pairs.push({
+    before: 'Lead calls/texts at 9pm → rings to voicemail → calls next contractor on Google',
+    after: 'Lead contacts at 9pm → AI responds in 60 sec → estimate booked by morning'
+  });
+
+  const hasReview = svcNames.some(n => n.includes('review'));
+  if (hasReview) {
+    const rStr = rating ? `sitting at ${rating.reviews} reviews` : 'getting 1–2/month';
+    pairs.push({
+      before: `Job complete → awkward manual ask → ${rStr}`,
+      after: 'Job marked done → automated 3-touch text sequence → 4–5 new reviews/month passively'
+    });
+  }
+
+  const hasReact = svcNames.some(n => n.includes('reactivation') || n.includes('past customer'));
+  if (hasReact) pairs.push({
+    before: 'Storm hits area → past customers don\'t hear from you → they call first roofer on Google',
+    after: 'Storm detected → automated text to every past customer in affected zip → 30+ replies before noon'
+  });
+
+  const hasFollowUp = svcNames.some(n => n.includes('follow') || n.includes('estimate'));
+  if (hasFollowUp) pairs.push({
+    before: 'Estimate sent → no follow-up → 40% of quotes die in inbox',
+    after: 'Estimate sent → automated 3-touch sequence → 20–30% of ghosted quotes re-engage'
+  });
+
+  // GEO gap — always show for trades
+  if (['roofing','plumbing','HVAC','local'].some(t => sbTrade(b).includes(t))) pairs.push({
+    before: `Homeowner asks ChatGPT "best ${trade} in ${city}" → ${b.name} doesn't appear`,
+    after: 'GBP activity + schema markup + neighborhood pages → shows up in AI search results'
+  });
+
+  return pairs.slice(0, 4);
+}
+
+function sbMarketIntel(b) {
+  const tags = b.tags || [];
+  const city = b.city.split(',')[0];
+  const rating = sbParseRating(b);
+  const bullets = [];
+
+  if (tags.includes('texas-dfw')) {
+    bullets.push('DFW had 47+ hail events in 2024 — one of the most active storm markets in the US');
+    const isCollin = ['Plano','Frisco','McKinney','Allen','Richardson'].some(c => city.includes(c));
+    const isTarrant = ['Fort Worth','Keller','Mansfield','Arlington'].some(c => city.includes(c));
+    bullets.push(isCollin ? `Average roofing job in ${city}: $22K–$38K — Collin County premium market`
+      : isTarrant ? `Average roofing job in ${city}: $18K–$28K — Tarrant County growth corridor`
+      : 'Average DFW roofing job: $18K–$35K — higher in Collin/Denton premium zips');
+    bullets.push('Spanish-speaking homeowners = 40%+ of DFW market — bilingual AI captures what competitors miss');
+    bullets.push('First contractor to respond wins 78% of roofing bids — speed beats price in this market');
+  } else if (tags.includes('denver-co')) {
+    bullets.push('Denver averages 12+ hail events per season — storm calls flood in May through September');
+    const isPremium = ['Cherry Hills','Greenwood','Highlands Ranch','Centennial'].some(c => city.includes(c));
+    bullets.push(isPremium ? `${city} homes average $1.5M+ — a single slate or tile job runs $35K–$120K`
+      : 'Front Range average residential roofing job: $12K–$18K');
+    bullets.push(rating && rating.reviews < 60
+      ? `${b.name} has ${rating.reviews} reviews — 74% of Denver-area contractors have under 50`
+      : '74% of Denver-area roofing contractors have under 50 Google reviews — count is the #1 ranking signal');
+    bullets.push('First to respond wins 78% of residential bids — calls at 6pm go to whoever answers');
+  } else if (tags.includes('greenwich') || tags.includes('stamford')) {
+    bullets.push('Fairfield County is the highest per-capita income county in Connecticut');
+    bullets.push('Decision-makers here move fast once they decide — frictionless follow-up is non-negotiable');
+    bullets.push('Same-day response rate among local providers is under 30% — AI gives a measurable edge');
+    bullets.push('A single retained client in this market is worth 3–10× the same relationship elsewhere');
+  } else {
+    (b.reasoning||[]).slice(0, 4).forEach(r => bullets.push(r));
+  }
+  return bullets.filter(Boolean).slice(0, 4);
+}
+
+function sbObjections(b) {
+  const isRoofing = sbTrade(b).includes('roof');
+  const isEnterprise = ['finance','legal'].includes(b.industry);
+  const ds = b.dealSize || '$2,500/mo';
+  const mult = sbRetainerMult(b);
+  const multStr = mult !== '—' ? `${mult.replace('×','')} months of retainer` : 'multiple months';
+
+  if (isRoofing) return [
+    { q: '"I already have a marketing company."', a: 'What are they doing for your after-hours leads? We\'re not marketing — we\'re infrastructure. Completely different.' },
+    { q: '"I\'m too busy right now."', a: 'That\'s exactly why this works — you set it up once and it runs forever. We\'re not adding to your workload, we\'re removing the parts nobody does.' },
+    { q: '"How much does it cost?"', a: `${ds}. One job covers ${multStr}. Our founder does a free audit first so the number makes sense in context — can I get him 15 minutes with you?` },
+    { q: '"I\'ve tried things like this before."', a: 'Month-to-month, no contracts, cancel with 30 days notice. We earn your business every month. What specifically didn\'t work last time?' },
+    { q: '"I need to think about it."', a: 'Totally fair. One question — what would you need to see to know it\'s worth 15 minutes? I can get that ready for the call.' },
+  ];
+  if (isEnterprise) return [
+    { q: '"We already have an internal tech team."', a: 'We build on top of what you have — not a replacement. Most of what we deploy integrates with existing workflows in under 2 weeks.' },
+    { q: '"This isn\'t the right time."', a: 'Every month you wait, the operational backlog compounds. The best time to automate is before the next growth push, not after.' },
+    { q: '"What\'s the ROI?"', a: 'Depends on what we automate. That\'s why we start with a free ops audit — we don\'t pitch numbers we can\'t defend. 30 minutes to find the biggest lever.' },
+    { q: '"We tried AI tools before and they didn\'t deliver."', a: 'Most firms tried generic tools on complex workflows. We build custom. What specifically didn\'t perform?' },
+    { q: '"Who else have you done this for?"', a: 'Happy to share case studies — two comparable firms on request. Our founder walks through both in 20 minutes.' },
+  ];
+  return [
+    { q: '"I already have a marketing company."', a: 'We\'re not a marketing company — we\'re automation infrastructure. Your current agency doesn\'t answer phones at 9pm. We do.' },
+    { q: '"I\'m too busy."', a: 'That\'s exactly why this works — two-week deployment, then it runs without you. One afternoon of your time, permanent payoff.' },
+    { q: '"How much does it cost?"', a: 'Depends on your setup. Our founder does a free 15-minute audit first so the number makes sense in context — can I grab him a time with you this week?' },
+    { q: '"I\'ve tried things like this before."', a: 'Month-to-month, no contracts, cancel with 30 days notice. We earn your business every month. What specifically didn\'t work last time?' },
+    { q: '"I need to think about it."', a: 'Totally fair. What would you need to see to know it\'s worth 15 minutes? I can have that ready for the call.' },
+  ];
+}
+
+function sbVoicemail(b) {
+  const name = sbOwnerName(b);
+  const gap = sbGap(b).toLowerCase().replace(/^[^a-z]+/, '');
+  return `"Hey ${name} — this is [caller] from 4THWALL. I was looking at ${b.name} and noticed ${gap}. Quick question about your after-hours leads — I\'ll be brief. Call me back or I\'ll try you again tomorrow. Thanks."`;
+}
+
+function sbGeoDemo(b) {
+  const city = b.city.split(',')[0];
+  const trade = sbTrade(b);
+  const query = `best ${trade} in ${city}`;
+  return {
+    query,
+    setup: '"Let me pull up ChatGPT right now while we\'re talking and show you something — takes 60 seconds."',
+    appears: '"You\'re showing up — but look who\'s ranked above you. That\'s the gap we close."',
+    missing: `"This is the problem. Every homeowner asking AI for a ${trade} in ${city} right now — you\'re invisible. We fix that."`,
+  };
+}
+
+function sbConvFlow(b) {
+  const city = b.city.split(',')[0];
+  const trade = sbTrade(b);
+  const isRoofing = trade.includes('roof');
+  const opener = (b.openingLine || b.pitch || '').replace(/"/g, '&quot;');
+
+  return [
+    { num: 'STEP 1', title: 'OPEN',
+      html: `<div class="sb2-step-content"><em style="font-size:13.5px;font-weight:700">"${opener}"</em></div>` },
+    { num: 'STEP 2', title: 'QUALIFY',
+      html: `<div class="sb2-step-content">${
+        isRoofing
+          ? '<strong>Q1:</strong> "What does your current process look like when someone calls or texts after hours?"<br><br><strong>Q2:</strong> "How many Google reviews did you pick up last month?"'
+          : '<strong>Q1:</strong> "What happens when a lead comes in outside business hours right now?"<br><br><strong>Q2:</strong> "How are you currently following up with people who don\'t book on the first contact?"'
+      }</div>` },
+    { num: 'STEP 3', title: 'BRIDGE',
+      html: (isRoofing ? [
+        { cond: 'If "nothing after hours"', say: 'That\'s exactly the gap we close — we put an AI on your line that responds in 60 seconds, books the estimate, and the homeowner never knows it\'s not you.' },
+        { cond: `If "a few reviews"`, say: `In ${city}, the contractors getting the most calls have 100+ reviews. We automate review requests after every job — most clients triple their count in 90 days.` },
+      ] : [
+        { cond: 'If they describe manual follow-up', say: 'That\'s exactly the gap we close — we automate the part of your process that\'s most likely to lose a lead.' },
+        { cond: 'If they mention competition', say: 'Your competitors are using AI to respond faster. The businesses we work with respond in under 60 seconds, even at 9pm on a Sunday.' },
+      ]).map(br => `<div class="sb2-step-branch"><div class="sb2-branch-if">${br.cond}</div><div class="sb2-branch-say">"${br.say.replace(/"/g,'&quot;')}"</div></div>`).join('') },
+    { num: 'STEP 4', title: 'DEMO ASK',
+      html: `<div class="sb2-step-content">"I\'d love to pull up your business in ChatGPT while we\'re on the phone and show you exactly where you\'re appearing when homeowners search for a ${trade} in ${city}. Takes 2 minutes — worth seeing."</div>` },
+    { num: 'STEP 5', title: 'CLOSE',
+      html: `<div class="sb2-step-content">${b.ask ? `"${b.ask.replace(/"/g,'&quot;')}"<br><br><em style="color:var(--muted)">— or —</em><br><br>` : ''}"What\'s a good time this week for a 15-minute call with our founder? He\'s local and will show you the full system live."</div>` },
+  ];
+}
+
+function renderSignalBrief(b) {
+  const city = b.city.split(',')[0];
+  const ownerFirst = sbOwnerName(b);
+  const opener = (b.openingLine || b.pitch || '').replace(/"/g, '&quot;');
+
+  // ── 1. BATTLE CARD ──────────────────────────
+  const battle = `<div class="sb2-battle">
+  <div class="sb2-battle-grid">
+    <div class="sb2-cell"><div class="sb2-cell-label">MARKET</div><div class="sb2-cell-val">${b.city} — ${sbMarketDesc(b)}</div></div>
+    <div class="sb2-cell"><div class="sb2-cell-label">GAP</div><div class="sb2-cell-val">${sbGap(b)}</div></div>
+    <div class="sb2-cell"><div class="sb2-cell-label">ONE JOB ≈</div><div class="sb2-cell-val sb2-accent">${sbJobVal(b)}</div></div>
+    <div class="sb2-cell"><div class="sb2-cell-label">RETAINER PAYS</div><div class="sb2-cell-val sb2-accent">${sbRetainerMult(b)} itself per job closed</div></div>
+  </div>
+  <div class="sb2-opener">"${opener}"</div>
+</div>`;
+
+  // ── 2. CONVERSATION FLOW ────────────────────
+  const steps = sbConvFlow(b).map(s => `<div class="sb2-step">
+  <div class="sb2-step-hdr" onclick="this.parentElement.classList.toggle('sb2-open')">
+    <div><div class="sb2-step-num">${s.num}</div><div class="sb2-step-title">${s.title}</div></div>
+    <span class="sb2-chevron">▾</span>
+  </div>
+  <div class="sb2-step-body">${s.html}</div>
+</div>`).join('');
+  const flow = sbSection('CONVERSATION FLOW', steps);
+
+  // ── 3. WHAT WE ACTUALLY FIX ─────────────────
+  const baHTML = sbBeforeAfters(b).map(ba => `<div class="sb2-ba">
+  <div class="sb2-before"><div class="sb2-ba-label">BEFORE 4THWALL</div><div class="sb2-ba-text">${ba.before}</div></div>
+  <div class="sb2-after"><div class="sb2-ba-label">AFTER 4THWALL</div><div class="sb2-ba-text">${ba.after}</div></div>
+</div>`).join('');
+  const fix = sbSection('WHAT WE ACTUALLY FIX', baHTML);
+
+  // ── 4. MARKET INTELLIGENCE ──────────────────
+  const intelHTML = sbMarketIntel(b).map(i => `<div class="sb2-intel-item">${i}</div>`).join('');
+  const intel = sbSection('MARKET INTELLIGENCE', intelHTML);
+
+  // ── 5. OBJECTION KILL SHOTS ─────────────────
+  const objHTML = sbObjections(b).map(o => `<div class="sb2-obj">
+  <div class="sb2-obj-q" onclick="this.parentElement.classList.toggle('sb2-open')">${o.q}<span class="sb2-obj-arrow">▾</span></div>
+  <div class="sb2-obj-a">${o.a}</div>
+</div>`).join('');
+  const objs = sbSection('OBJECTION KILL SHOTS', objHTML);
+
+  // ── 6. VOICEMAIL SCRIPT ─────────────────────
+  const vmHTML = `<div class="sb2-vm">${sbVoicemail(b)}<div class="sb2-vm-note">≈ 18 seconds at normal pace</div></div>`;
+  const vm = sbSection('VOICEMAIL SCRIPT', vmHTML);
+
+  // ── 7. GEO DEMO SETUP ───────────────────────
+  const geo = sbGeoDemo(b);
+  const safeQ = geo.query.replace(/'/g, "\\'");
+  const geoHTML = `
+<div class="sb2-geo-row"><div class="sb2-geo-label">CHATGPT QUERY — CLICK TO COPY</div>
+  <div class="sb2-geo-query" onclick="navigator.clipboard?.writeText('${safeQ}');this.textContent='✓ Copied!';setTimeout(()=>this.textContent='&quot;${safeQ}&quot;',1500)">"${geo.query}"</div></div>
+<div class="sb2-geo-row"><div class="sb2-geo-label">SETUP LINE</div><div class="sb2-geo-text">${geo.setup}</div></div>
+<div class="sb2-geo-row"><div class="sb2-geo-label">IF THEY APPEAR</div><div class="sb2-geo-text">${geo.appears}</div></div>
+<div class="sb2-geo-row"><div class="sb2-geo-label" style="color:#ef4444">IF THEY DON'T APPEAR</div><div class="sb2-geo-text sb2-gold">${geo.missing}</div></div>`;
+  const geoSec = sbSection('GEO DEMO SETUP', geoHTML);
+
+  // ── 8. QUICK REFERENCE STRIP ────────────────
+  const strip = `<div class="sb2-strip">
+  <div class="sb2-strip-item sb2-gold"><span class="sb2-strip-label">TIER:</span>${b.dealSize||'—'}</div>
+  <div class="sb2-strip-item"><span class="sb2-strip-label">CLOSE:</span>${b.closeSpeed||'—'}</div>
+  <div class="sb2-strip-item"><span class="sb2-strip-label">OWNER:</span>${ownerFirst}</div>
+</div>`;
+
+  return `<div class="sb2">${battle}${flow}${fix}${intel}${objs}${vm}${geoSec}</div>${strip}`;
+}
+
+function sbSection(label, bodyHTML) {
+  return `<div class="sb2-section">
+  <div class="sb2-section-hdr" onclick="this.parentElement.classList.toggle('sb2-open')">
+    <span class="sb2-section-label">${label}</span>
+    <span class="sb2-chevron">▾</span>
+  </div>
+  <div class="sb2-section-body">${bodyHTML}</div>
+</div>`;
+}
 
 // ── CALL LOG RENDERER ──
 function renderCallLog(id) {
