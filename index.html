@@ -152,6 +152,14 @@ html, body {
   font-size: 10px;
   color: var(--muted);
 }
+.nav-sub {
+  padding-left: 22px;
+  font-size: 11.5px;
+  margin-bottom: 1px;
+}
+.nav-sub .nav-dot {
+  width: 3px; height: 3px;
+}
 
 .sidebar-footer {
   margin-top: auto;
@@ -897,21 +905,73 @@ html, body {
   </div>
 
   <div class="sidebar-section">
-    <div class="section-label">Location</div>
+    <div class="section-label">Connecticut</div>
     <div class="nav-item" data-filter="greenwich" onclick="setFilter('greenwich',this)">
       <div class="nav-dot"></div>Greenwich
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="greenwich:finance" onclick="setFilter('greenwich:finance',this)">
+      <div class="nav-dot"></div>Finance
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="greenwich:realestate" onclick="setFilter('greenwich:realestate',this)">
+      <div class="nav-dot"></div>Real Estate
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="greenwich:healthcare" onclick="setFilter('greenwich:healthcare',this)">
+      <div class="nav-dot"></div>Healthcare
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="greenwich:legal" onclick="setFilter('greenwich:legal',this)">
+      <div class="nav-dot"></div>Legal / Prof
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="greenwich:hospitality" onclick="setFilter('greenwich:hospitality',this)">
+      <div class="nav-dot"></div>Hospitality
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="greenwich:localservices" onclick="setFilter('greenwich:localservices',this)">
+      <div class="nav-dot"></div>Local Services
       <span class="nav-count"></span>
     </div>
     <div class="nav-item" data-filter="stamford" onclick="setFilter('stamford',this)">
       <div class="nav-dot"></div>Stamford
       <span class="nav-count"></span>
     </div>
+    <div class="nav-item nav-sub" data-filter="stamford:finance" onclick="setFilter('stamford:finance',this)">
+      <div class="nav-dot"></div>Finance
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="stamford:realestate" onclick="setFilter('stamford:realestate',this)">
+      <div class="nav-dot"></div>Real Estate
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="stamford:healthcare" onclick="setFilter('stamford:healthcare',this)">
+      <div class="nav-dot"></div>Healthcare
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="stamford:legal" onclick="setFilter('stamford:legal',this)">
+      <div class="nav-dot"></div>Legal / Prof
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="stamford:hospitality" onclick="setFilter('stamford:hospitality',this)">
+      <div class="nav-dot"></div>Hospitality
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="stamford:localservices" onclick="setFilter('stamford:localservices',this)">
+      <div class="nav-dot"></div>Local Services
+      <span class="nav-count"></span>
+    </div>
   </div>
 
   <div class="sidebar-section">
-    <div class="section-label">Out-of-State Markets</div>
+    <div class="section-label">Texas · DFW</div>
     <div class="nav-item" data-filter="texas-dfw" onclick="setFilter('texas-dfw',this)">
-      <div class="nav-dot" style="background:#c9a84c"></div>Texas · DFW
+      <div class="nav-dot" style="background:#c9a84c"></div>All DFW
+      <span class="nav-count"></span>
+    </div>
+    <div class="nav-item nav-sub" data-filter="texas-dfw:localservices" onclick="setFilter('texas-dfw:localservices',this)">
+      <div class="nav-dot" style="background:#c9a84c"></div>Roofing
       <span class="nav-count"></span>
     </div>
   </div>
@@ -2120,17 +2180,26 @@ const IND_LABELS = {
 };
 
 // ── FILTER ──
+function locMatch(loc, b) {
+  if (loc === 'greenwich') return b.city.toLowerCase().includes('greenwich');
+  if (loc === 'stamford') return b.city.toLowerCase().includes('stamford');
+  return (b.tags||[]).includes(loc);
+}
 function matchFilter(b) {
   const f = currentFilter;
   if (f === 'all') return true;
+  if (f.includes(':')) {
+    const [loc, ind] = f.split(':');
+    return locMatch(loc, b) && b.industry === ind;
+  }
   if (f === 'finance') return b.industry === 'finance';
   if (f === 'realestate') return b.industry === 'realestate';
   if (f === 'healthcare') return b.industry === 'healthcare';
   if (f === 'legal') return b.industry === 'legal';
   if (f === 'hospitality') return b.industry === 'hospitality';
   if (f === 'localservices') return b.industry === 'localservices';
-  if (f === 'greenwich') return b.city.toLowerCase().includes('greenwich');
-  if (f === 'stamford') return b.city.toLowerCase().includes('stamford');
+  if (f === 'greenwich') return locMatch('greenwich', b);
+  if (f === 'stamford') return locMatch('stamford', b);
   if (f === 'texas-dfw') return (b.tags||[]).includes('texas-dfw');
   if (f === 'scan1') return b.scan === 1;
   if (f === 'scan2') return b.scan === 2;
@@ -2173,10 +2242,15 @@ function getFiltered() {
 
 // ── NAV COUNTS ──
 function updateCounts() {
-  const filters = ['all','finance','realestate','healthcare','legal','hospitality','localservices','greenwich','stamford','texas-dfw','scan1','scan2','scan3','scan4','scan5','scan6','scan7','scan8','scan9','top15','hipaa','product-pool','product-trade','product-haul','product-msp','product-studio','product-fitness','product-retail'];
+  const filters = ['all','finance','realestate','healthcare','legal','hospitality','localservices',
+    'greenwich','greenwich:finance','greenwich:realestate','greenwich:healthcare','greenwich:legal','greenwich:hospitality','greenwich:localservices',
+    'stamford','stamford:finance','stamford:realestate','stamford:healthcare','stamford:legal','stamford:hospitality','stamford:localservices',
+    'texas-dfw','texas-dfw:localservices',
+    'scan1','scan2','scan3','scan4','scan5','scan6','scan7','scan8','scan9','top15','hipaa',
+    'product-pool','product-trade','product-haul','product-msp','product-studio','product-fitness','product-retail'];
   filters.forEach(f => {
     const els = document.querySelectorAll(`[data-filter="${f}"] .nav-count`);
-    const prev = currentFilter; const prevQ = currentQ; const prevS = currentSearch;
+    const prev = currentFilter;
     currentFilter = f;
     const cnt = getFiltered().length;
     currentFilter = prev;
@@ -2230,11 +2304,22 @@ function render() {
 }
 
 // ── FILTER CONTROLS ──
+const LOC_LABELS = { greenwich:'Greenwich', stamford:'Stamford', 'texas-dfw':'Texas · DFW' };
+function filterTitle(f) {
+  if (f === 'all') return 'All targets';
+  if (f.includes(':')) {
+    const [loc, ind] = f.split(':');
+    return (LOC_LABELS[loc]||loc) + ' · ' + (IND_LABELS[ind]||ind);
+  }
+  if (LOC_LABELS[f]) return LOC_LABELS[f];
+  if (IND_LABELS[f]) return IND_LABELS[f];
+  return f;
+}
 function setFilter(f, el) {
   currentFilter = f;
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   if (el) el.classList.add('active');
-  document.getElementById('topbarTitle').textContent = el ? el.textContent.trim().replace(/\d+/,'').trim() : 'All targets';
+  document.getElementById('topbarTitle').textContent = filterTitle(f);
   render();
   closeSidebar();
 }
